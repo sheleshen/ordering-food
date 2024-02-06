@@ -1,8 +1,6 @@
-
 .bg-image {
-    background-image: url(/public/image/restaurant.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-image: url(/public/image/restaurant.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
