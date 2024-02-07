@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
 
-  // не до конца понимаю, как работает
   useEffect(() => {
     fetch("https://www.bit-by-bit.ru/api/student-projects/restaurants")
       .then((response) => response.json())
