@@ -1,6 +1,7 @@
 import "./HomePage.css";
 import Button from "components/Button";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
@@ -68,10 +69,12 @@ function HomePage() {
                     Телефон {restaurant.phone}
                   </p>
                 </div>
-                <Button
-                  title={"Подробнее"}
-                  description={"Перейти в ресторан"}
-                />
+                <Link to={`/${restaurant.slug}`}>
+                  <Button
+                    title={"Подробнее"}
+                    description={"Перейти в ресторан"}
+                  />
+                </Link>
               </div>
             );
           })}
