@@ -20,11 +20,11 @@ function HomePage() {
     <div>
       {/* Тут будет баннер */}
       <div className="bg-image">
-        <div className="px-6 md:px-4 lg:px-2 xl:px-0 max-w-7xl m-auto flex flex-col py-56 gap-8">
-          <p className="text-8xl font-bold text-white">
+        <div className="px-6 md:px-4 lg:px-2 xl:px-0 max-w-7xl m-auto flex flex-col py-40 sm:py-44 md:py-48 lg:py-56 gap-8">
+          <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white">
             Ресторан у вас на кухне
           </p>
-          <p className="text-4xl font-light text-white">
+          <p className="text-2xl md:text-3xl lg:text-4xl font-light text-white">
             Доставим еду из вашего любимого ресторана к вам домой!
           </p>
         </div>
@@ -32,7 +32,7 @@ function HomePage() {
 
       {/* Каталог */}
       <div className="px-6 md:px-4 lg:px-2 xl:px-0 py-10 md:py-12 lg:py-14 max-w-7xl m-auto ">
-        <p className="text-5xl font-bold pb-10 md:pb-12 lg:pb-14">
+        <p className="text-3xl md:text-4xl lg:text-5xl font-bold pb-10 md:pb-12 lg:pb-14">
           Выберите ресторан ниже для доставки
         </p>
 
@@ -49,21 +49,21 @@ function HomePage() {
                     src={restaurant.image}
                     className="h-64 object-cover object-center w-full rounded-3xl"
                   ></img>
-                  <p className="text-2xl py-3 font-bold text-slate-800">
+                  <p className="text-lg md:text-xl lg:text-2xl py-2 md:py-3 font-bold text-slate-800">
                     {restaurant.name}
                   </p>
-                  <p className="text-base font-semibold text-amber-500">
+                  <p className="text-sm md:text-base font-semibold text-amber-500">
                     Кухня: {restaurant.cuisine}
                   </p>
                   <div className="flex gap-1 items-center">
-                    <p className="text-base font-medium text-slate-600">
+                    <p className="text-sm md:text-base font-medium text-slate-600">
                       Мы работаем:
                     </p>
-                    <span className="text-base font-medium text-slate-600">
+                    <span className="text-sm md:text-base font-medium text-slate-600">
                       12:00 - 02:00
                     </span>
                   </div>
-                  <p className="text-base font-medium text-slate-600">
+                  <p className="text-sm md:text-base font-medium text-slate-600">
                     Телефон {restaurant.phone}
                   </p>
                 </div>
