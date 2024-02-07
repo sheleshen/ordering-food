@@ -18,7 +18,6 @@ function HomePage() {
 
   return (
     <div>
-
       {/* Тут будет баннер */}
       <div className="bg-image">
         <div className="px-6 md:px-4 lg:px-2 xl:px-0 max-w-7xl m-auto flex flex-col py-56 gap-8">
@@ -79,8 +78,6 @@ function HomePage() {
           })}
         </div>
       </div>
-
-
     </div>
   );
 }

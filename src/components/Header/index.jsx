@@ -1,13 +1,27 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <header className="bg-white shadow-lg shadow-slate-200">
       <div className="px-6 md:px-4 lg:px-2 xl:px-0 max-w-7xl m-auto py-8 flex flex-row justify-between">
         {/* Лого */}
-        <div>Лого</div>
+        <div className="flex gap-4 items-center">
+          <Link to={`/`}>
+            <div>
+              <img
+                className="w-10"
+                src="/image/logo-header.png"
+                alt="Логотип"
+              />
+            </div>
+          </Link>
+          <p className="font-extrabold text-xl text-slate-700">О, да! Еда!</p>
+        </div>
+
         {/* Корзина и избранное */}
         <div className="flex gap-4">
-          <div>Избранное</div>
-          <div>Корзина</div>
+          <div className="text-slate-900">Избранное</div>
+          <div className="text-slate-900">Корзина</div>
         </div>
       </div>
     </header>
