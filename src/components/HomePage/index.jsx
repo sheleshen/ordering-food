@@ -1,26 +1,23 @@
 import "./HomePage.css";
 import Button from "components/Button";
-import Header from "components/Header";
-import Footer from "components/Footer";
 import { useEffect, useState } from "react";
 
 function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
 
-  // не до конца понимаю, как раобтает
+  // не до конца понимаю, как работает
   useEffect(() => {
     fetch("https://www.bit-by-bit.ru/api/student-projects/restaurants")
       .then((response) => response.json())
       .then((data) => setRestaurants(data));
   }, []);
 
-  console.log(setRestaurants);
-  console.log("restaurants");
-  console.log(restaurants);
+  // console.log(setRestaurants);
+  // console.log("restaurants");
+  // console.log(restaurants);
 
   return (
     <div>
-      <Header />
 
       {/* Тут будет баннер */}
       <div className="bg-image">
@@ -81,7 +78,7 @@ function HomePage() {
         </div>
       </div>
 
-      <Footer />
+
     </div>
   );
 }
