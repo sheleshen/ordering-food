@@ -55,16 +55,11 @@ function HomePage() {
                   <p className="text-sm md:text-base font-semibold text-amber-500">
                     Кухня: {restaurant.cuisine}
                   </p>
-                  <div className="flex gap-1 items-center">
-                    <p className="text-sm md:text-base font-medium text-slate-600">
-                      Мы работаем:
-                    </p>
-                    <span className="text-sm md:text-base font-medium text-slate-400">
-                      {restaurant.openAt} - {restaurant.closeAt}
-                    </span>
-                  </div>
+                  <span className="text-sm md:text-base font-medium text-slate-600">
+                    Часы работы: {restaurant.openAt} - {restaurant.closeAt}
+                  </span>
                   <p className="text-sm md:text-base font-medium text-slate-600">
-                    Телефон {restaurant.phone}
+                    Телефон: {restaurant.phone}
                   </p>
                 </div>
                 <Link to={`/${restaurant.slug}`}>

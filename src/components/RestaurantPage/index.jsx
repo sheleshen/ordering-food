@@ -35,21 +35,18 @@ function RestaurantPage() {
             <p className="text-lg md:text-xl lg:text-2xl py-2 md:py-3 font-bold text-slate-800">
               {restaurant.name}
             </p>
-            <p className="text-sm md:text-base font-medium text-slate-400">
-              {restaurant.openAt}
-            </p>
-            <p className="text-sm md:text-base font-medium text-slate-400">
-              {restaurant.closeAt}
-            </p>
+            <span className="text-sm md:text-base font-medium text-slate-400">
+              Часы работы: {restaurant.openAt} - {restaurant.closeAt}
+            </span>
             <p className="text-sm md:text-base font-medium text-slate-800">
-              {restaurant.address}
+              Адрес: {restaurant.address}
             </p>
 
             <p className="text-sm md:text-base font-medium text-slate-800">
-              {restaurant.phone}
+              Телефон: {restaurant.phone}
             </p>
             <p className="text-sm md:text-base font-medium text-slate-800">
-              {restaurant.email}
+              E-mail: {restaurant.email}
             </p>
           </div>
         </div>
