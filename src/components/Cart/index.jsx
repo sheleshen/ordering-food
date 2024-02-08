@@ -1,4 +1,6 @@
+import Button from "components/Button";
 import "./Cart.css";
+import { Link } from "react-router-dom";
 
 function Cart() {
 
@@ -9,6 +11,12 @@ function Cart() {
                 <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-400">
                     Ваша корзина пуста
                 </p>
+                <Link to={`/`}>
+                <Button 
+                title={"Вернуться на главную"}
+                description={"Перейти на главную"}
+                />
+                </Link>
             </div>
             
         </div>
