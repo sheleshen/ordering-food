@@ -59,8 +59,8 @@ function HomePage() {
                     <p className="text-sm md:text-base font-medium text-slate-600">
                       Мы работаем:
                     </p>
-                    <span className="text-sm md:text-base font-medium text-slate-600">
-                      12:00 - 02:00
+                    <span className="text-sm md:text-base font-medium text-slate-400">
+                      {restaurant.openAt} - {restaurant.closeAt}
                     </span>
                   </div>
                   <p className="text-sm md:text-base font-medium text-slate-600">

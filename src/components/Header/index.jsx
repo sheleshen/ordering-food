@@ -20,8 +20,10 @@ function Header() {
 
         {/* Корзина и избранное */}
         <div className="flex gap-4">
-          <div className="text-slate-900">Избранное</div>
-          <div className="text-slate-900">Корзина</div>
+          {/* <div className="text-slate-900">Избранное</div> */}
+          <Link to={`/cart`}>
+            <div className="text-slate-900">Корзина</div>
+          </Link>
         </div>
       </div>
     </header>

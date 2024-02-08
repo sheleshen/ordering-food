@@ -24,14 +24,14 @@ function RestaurantPage() {
       </p>
 
       <div className="flex flex-col gap-4 px-5 py-5 bg-slate-100 rounded-3xl">
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-6 md:gap-8">
           <img
             alt=""
             src={restaurant.image}
             className="h-48 md:h-60 lg:h-80 object-cover object-center w-48 md:w-60 lg:w-80 rounded-3xl"
           ></img>
 
-          <div className="flex flex-col gap-2 md:gap-4">
+          <div className="flex flex-col gap-1 md:gap-2">
             <p className="text-lg md:text-xl lg:text-2xl py-2 md:py-3 font-bold text-slate-800">
               {restaurant.name}
             </p>
@@ -54,7 +54,7 @@ function RestaurantPage() {
           </div>
         </div>
 
-        <p className="text-sm md:text-base font-medium text-slate-800">
+        <p className="text-base md:text-lg font-medium text-slate-800">
           {restaurant.description}
         </p>
       </div>
