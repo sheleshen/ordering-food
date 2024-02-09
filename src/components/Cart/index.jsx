@@ -20,6 +20,7 @@ function Cart() {
         </div>
       </div>
 
+{/* Сделать кнопку с изменением состояния/цвета */}
 
       {/* <div className="px-6 md:px-4 lg:px-2 xl:px-0 py-28 md:py-32 lg:py-40 max-w-7xl m-auto "> */}
           {/* <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-400"> */}
@@ -54,7 +55,7 @@ function Cart() {
             {/* </div> */}
       {/* </div> */}
 
-      
+
     </div>
   );
 }

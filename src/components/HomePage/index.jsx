@@ -66,6 +66,7 @@ function HomePage() {
                   <Button
                     title={"Подробнее"}
                     description={"Перейти в ресторан"}
+                    variant='default'
                   />
                 </Link>
               </div>

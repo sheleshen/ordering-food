@@ -50,7 +50,11 @@ function RestaurantMenu() {
                     title={"Перейти в корзину"}
                     description={"Перейти в корзину"}
                   /> */}
-              <Button title={"+ Добавить"} description={"Добавить в корзину"} />
+              <Button 
+              title={"+ Добавить"} 
+              description={"Добавить в корзину"}
+              variant='default'
+              />
               {/* </Link> */}
             </div>
           );
