@@ -2,6 +2,7 @@ import "./HomePage.css";
 import Button from "components/Button";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
@@ -56,7 +57,7 @@ function HomePage() {
                     Кухня: {restaurant.cuisine}
                   </p>
                   <span className="text-sm md:text-base font-medium text-slate-600">
-                    Часы работы: {restaurant.openAt} - {restaurant.closeAt}
+                    Часы работы: {format(new Date(restaurant.openAt), 'HH:mm')} - {format(new Date(restaurant.closeAt), 'HH:mm')}
                   </span>
                   <p className="text-sm md:text-base font-medium text-slate-600">
                     Телефон: {restaurant.phone}
