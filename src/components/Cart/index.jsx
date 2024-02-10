@@ -1,10 +1,12 @@
 import Button from "components/Button";
 import "./Cart.css";
 import { Link } from "react-router-dom";
+// import ModalWindowError from "components/ModalWindowError";
 
 function Cart() {
   return (
     <div>
+      {/* <ModalWindowError /> */}
       <div className="px-6 md:px-4 lg:px-2 xl:px-0 py-28 md:py-32 lg:py-40 max-w-7xl m-auto ">
         <div className="flex flex-col gap-10 items-center">
           <img className="w-40" src="/image/shopping-bag.png" alt="" />
