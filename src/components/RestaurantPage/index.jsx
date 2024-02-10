@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantMenu from "components/RestaurantMenu";
+import { format } from "date-fns";
 
 function RestaurantPage() {
   const { slug } = useParams();
@@ -36,7 +37,9 @@ function RestaurantPage() {
               {restaurant.name}
             </p>
             <span className="text-sm md:text-base font-medium text-slate-400">
-              Часы работы: {restaurant.openAt} - {restaurant.closeAt}
+              Часы работы: {format(restaurant.openAt, 'HH:mm')} - {format(restaurant.closeAt, 'HH:mm')}
+              
+              {/* {restaurant.openAt} - {restaurant.closeAt} */}
             </span>
             <p className="text-sm md:text-base font-medium text-slate-800">
               Адрес: {restaurant.address}
