@@ -20,6 +20,8 @@ function RestaurantMenu() {
   //     console.log(setRestaurants);setRestaurants(data));
   console.log(items);
 
+  // const cartItems = []
+
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -45,17 +47,30 @@ function RestaurantMenu() {
                   {item.description}
                 </p>
               </div>
-              {/* <Link to={`/`}> */}
-              {/* <Button
-                    title={"Перейти в корзину"}
-                    description={"Перейти в корзину"}
-                  /> */}
+
+              {/* ПРОВЕРИТЬ НАХОЖДЕНИЕ ПОЗИЦИИ В КОРЗИНЕ в cartItems */}
+              {/* { cartItem.id === id ?
+                 ( <Link to={`/card`}>
+                    <Button
+                      title={"Перейти в корзину"}
+                      description={"Перейти в корзину"}
+                    />
+                  </Link>
+                  ):
+                  <Button 
+                    title={"+ Добавить"} 
+                    description={"Добавить в корзину"}
+                    variant='default'
+                    onClick='onClick'
+                  />
+              } */}
+              
               <Button 
               title={"+ Добавить"} 
               description={"Добавить в корзину"}
               variant='default'
               />
-              {/* </Link> */}
+              
             </div>
           );
         })}

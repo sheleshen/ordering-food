@@ -57,7 +57,8 @@ function HomePage() {
                     Кухня: {restaurant.cuisine}
                   </p>
                   <span className="text-sm md:text-base font-medium text-slate-600">
-                    Часы работы: {format(new Date(restaurant.openAt), 'HH:mm')} - {format(new Date(restaurant.closeAt), 'HH:mm')}
+                    Часы работы: {format(new Date(restaurant.openAt), "HH:mm")}{" "}
+                    - {format(new Date(restaurant.closeAt), "HH:mm")}
                     {/* {format(restaurant.openAt, 'HH:mm')} - {format(restaurant.closeAt, 'HH:mm')} */}
                   </span>
                   <p className="text-sm md:text-base font-medium text-slate-600">
@@ -68,7 +69,7 @@ function HomePage() {
                   <Button
                     title={"Подробнее"}
                     description={"Перейти в ресторан"}
-                    variant='default'
+                    variant="default"
                   />
                 </Link>
               </div>

@@ -37,9 +37,8 @@ function RestaurantPage() {
               {restaurant.name}
             </p>
             <span className="text-sm md:text-base font-medium text-slate-400">
-              Часы работы: {format(restaurant.openAt, 'HH:mm')} - {format(restaurant.closeAt, 'HH:mm')}
-              
-              {/* {restaurant.openAt} - {restaurant.closeAt} */}
+              {/* Часы работы: {format(restaurant.openAt, "HH:mm")} -{" "}
+              {format(restaurant.closeAt, "HH:mm")} */}
             </span>
             <p className="text-sm md:text-base font-medium text-slate-800">
               Адрес: {restaurant.address}
