@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantMenu from "components/RestaurantMenu";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 
 function RestaurantPage() {
   const { slug } = useParams();

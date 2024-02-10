@@ -1,5 +1,3 @@
-// Кнопка для изменения состояния с "+ Добавить" на "Добавлено!""
-
 import classnames from "classnames";
 
 function Button(props) {
