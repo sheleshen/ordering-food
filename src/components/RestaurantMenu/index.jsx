@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import Button from "components/Button";
 
 function RestaurantMenu() {
   const { slug } = useParams();
-  console.log(slug);
 
   const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -17,10 +17,12 @@ function RestaurantMenu() {
       .then((data) => setItems(data));
   }, [slug]);
 
-  //     console.log(setRestaurants);setRestaurants(data));
-  console.log(items);
+  const addToCard = (item) => {
+    const updatedCartItems = [...cartItems, { ...item, quantity: 1 }];
+    setCartItems(updatedCartItems);
 
-  // const cartItems = []
+    localStorage.setItem("cardItems", json.stringify(updatedCartItems));
+  };
 
   return (
     <div>
@@ -64,13 +66,13 @@ function RestaurantMenu() {
                     onClick='onClick'
                   />
               } */}
-              
-              <Button 
-              title={"+ Добавить"} 
-              description={"Добавить в корзину"}
-              variant='default'
+
+              <Button
+                title={"+ Добавить"}
+                description={"Добавить в корзину"}
+                variant="default"
+                onClick={() => addToCard(item)}
               />
-              
             </div>
           );
         })}

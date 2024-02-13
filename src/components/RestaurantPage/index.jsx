@@ -5,14 +5,21 @@ import { format } from "date-fns";
 
 function RestaurantPage() {
   const { slug } = useParams();
-  console.log(slug);
 
-  const [restaurant, setRestaurant] = useState([]);
+  const [restaurant, setRestaurant] = useState({});
+  const [menuItems, setMenuItems] = useState([]);
+  console.log(menuItems);
 
   useEffect(() => {
     fetch(`https://www.bit-by-bit.ru/api/student-projects/restaurants/${slug}`)
       .then((response) => response.json())
       .then((data) => setRestaurant(data));
+
+    fetch(
+      `https://www.bit-by-bit.ru/api/student-projects/restaurants/${slug}/item`,
+    )
+      .then((response) => response.json())
+      .then((data) => setMenuItems(data));
   }, [slug]);
 
   //     console.log(setRestaurants);setRestaurants(data));
@@ -37,9 +44,9 @@ function RestaurantPage() {
               {restaurant.name}
             </p>
             <span className="text-sm md:text-base font-medium text-slate-400">
-              {restaurant.openAt && restaurant.closeAt ? 
-                `Часы работы:${format(new Date(restaurant.openAt), "HH:mm")} - ${format(new Date(), "HH:mm")}`
-              :  'Часы работы не указаны'}
+              {restaurant.openAt && restaurant.closeAt
+                ? `Часы работы:${format(new Date(restaurant.openAt), "HH:mm")} - ${format(new Date(), "HH:mm")}`
+                : "Часы работы не указаны"}
             </span>
             <p className="text-sm md:text-base font-medium text-slate-800">
               Адрес: {restaurant.address}
@@ -62,7 +69,7 @@ function RestaurantPage() {
       <p className="text-3xl md:text-4xl lg:text-5xl font-bold py-10 md:py-12 lg:py-14">
         Меню ресторана:
       </p>
-      <RestaurantMenu />
+      <RestaurantMenu items={menuItems} />
     </div>
   );
 }

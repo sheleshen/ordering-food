@@ -6,13 +6,14 @@ function Counter() {
   const [count, setCount] = useState(1);
 
   const minus = () => {
-    setCount(count + 1);
+    if (count > 1) {
+      setCount(count - 1);
+    }
   };
 
   const plus = () => {
-    setCount(count - 1);
+    setCount(count + 1);
   };
-  // сделать ограничение на отрицательное число!
 
   return (
     <div className="flex gap-4 items-center">
