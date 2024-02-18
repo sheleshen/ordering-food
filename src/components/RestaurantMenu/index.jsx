@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import { Link } from "react-router-dom";
 import Button from "components/Button";
 
@@ -17,11 +17,11 @@ function RestaurantMenu() {
       .then((data) => setItems(data));
   }, [slug]);
 
-  const addToCard = (item) => {
+  const addToCart = (item) => {
     const updatedCartItems = [...cartItems, { ...item, quantity: 1 }];
     setCartItems(updatedCartItems);
 
-    localStorage.setItem("cardItems", json.stringify(updatedCartItems));
+    localStorage.getItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
   return (
@@ -71,7 +71,7 @@ function RestaurantMenu() {
                 title={"+ Добавить"}
                 description={"Добавить в корзину"}
                 variant="default"
-                onClick={() => addToCard(item)}
+                onClick={() => addToCart(item)}
               />
             </div>
           );
