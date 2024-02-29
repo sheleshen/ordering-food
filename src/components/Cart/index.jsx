@@ -70,7 +70,9 @@ function Cart() {
                       <p className="text-sm md:text-base font-medium text-slate-600">
                         Количество: 
                       </p>
-                      <Counter />
+                      <Counter 
+                        // count={cartItems.find(cartItem => cartItem.itemId === item.id).quantity}
+                      />
                     </div>
                   
                   </div>

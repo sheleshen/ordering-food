@@ -33,8 +33,8 @@ function RestaurantMenu() {
   // };
 
   const addToCart = (item) => {
-    // const currentCartItem = cartItems.find(c => c.itemId === item.id)
-    const currentCartItem = findCartItem(item)
+    const currentCartItem = cartItems.find(c => c.itemId === item.id)
+    // const currentCartItem = findCartItem(item)
 
     // Проверить наличие item в cartItems
     if(currentCartItem) {
@@ -43,9 +43,8 @@ function RestaurantMenu() {
         quantity: currentCartItem.quantity + 1
       }
 
-      let newtItem = cartItems.filter(item.Id !== currentCartItem.itemId)
-      // let newtItem = cartItems.filter(cartItem.Id !== currentCartItem.itemId)
-      setCartItems([...newtItem, newCartItem])
+      let newItems = cartItems.filter(cartItem => cartItem.itemId !== currentCartItem.itemId)
+      setCartItems([...newItems, newCartItem])
     } else {
 
       const newCartItem = {
@@ -63,9 +62,19 @@ function RestaurantMenu() {
   // const addQuantity = () => {
   // }
 
-  const reduceQuantity = () => {
+  const reduceQuantity = (item) => {
+    const currentCartItem = findCartItem(item)
+    // Проверить наличие item в cartItems
+    if(currentCartItem) {
+      const newCartItem = {
+        ...currentCartItem,
+        quantity: currentCartItem.quantity - 1
+      }
 
-  }
+      let newItems = cartItems.filter(cartItem => cartItem.itemId !== currentCartItem.itemId)
+      setCartItems([...newItems, newCartItem])
+    }
+  };
 
   return (
     <div>
@@ -93,8 +102,6 @@ function RestaurantMenu() {
                 </p>
               </div>
 
-              {/* ПРОВЕРИТЬ НАХОЖДЕНИЕ ПОЗИЦИИ В КОРЗИНЕ в cartItems */}
-
               <div className="flex gap-4">
               { cartItems.find(cartItem => cartItem.itemId === item.id) ?
                  ( 
@@ -111,8 +118,8 @@ function RestaurantMenu() {
 
                   <Counter 
                   count={cartItems.find(cartItem => cartItem.itemId === item.id).quantity}
-                  plus={() => addToCart(item)}
-                  minus={reduceQuantity}
+                  addQuantity={() => addToCart(item)}
+                  reduceQuantity={() => reduceQuantity(item)}
                   /> 
                   </div>
                  
