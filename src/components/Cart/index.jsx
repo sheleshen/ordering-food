@@ -50,7 +50,7 @@ function Cart() {
       <div className="px-6 md:px-4 lg:px-2 xl:px-0 py-10 md:py-12 lg:py-14 max-w-7xl m-auto">
         
           <p className="text-3xl md:text-4xl lg:text-5xl pb-10 md:pb-12 lg:pb-14 font-bold text-slate-400">
-            Товары в корзине
+            Моя корзина
           </p>
         <div className="flex flex-col gap-10">
             <div className="flex flex-col px-5 py-5 gap-4 bg-slate-100 rounded-3xl justify-between">
@@ -67,9 +67,12 @@ function Cart() {
                     <p className="text-base md:text-lg font-bold text-amber-500">
                       Цена: {item.price} руб.
                     </p>
-                    <p className="text-sm md:text-base font-medium text-slate-600">
-                      Количество: <Counter />
-                    </p>
+                    <div className="flex flex-col gap-2">
+                      <p className="text-sm md:text-base font-medium text-slate-600">
+                        Количество: 
+                      </p>
+                      <Counter />
+                    </div>
                   
                   </div>
                 </div>

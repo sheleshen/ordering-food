@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from "components/Button";
+import Counter from "components/Counter";
+import uuid from "uuid4";
 
 function RestaurantMenu() {
   const { slug } = useParams();
@@ -21,12 +23,40 @@ function RestaurantMenu() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems])
 
+  // const addToCart = (item) => {
+  //   const updatedCartItems = [...cartItems, { ...item, itemId: item.id, id:12, quantity: 1 }];
+  //   setCartItems(updatedCartItems);
+  // };
 
-  // Добавить генерацию ID
   const addToCart = (item) => {
-    const updatedCartItems = [...cartItems, { ...item, itemId: item.id, id:12, quantity: 1 }];
-    setCartItems(updatedCartItems);
+    const currentCartItem = cartItems.find(c => c.itemId === item.id)
+
+    if(currentCartItem) {
+      const newCartItem = {
+        ...currentCartItem,
+        quantity: currentCartItem.quantity + 1
+      }
+
+      // let newtItem = cartItems.filter(cartItem.itemId !== currentCartItem.itemId)
+      setCartItems([...cartItems, newCartItem])
+    } else {
+
+      const newtCartItem = {
+        ...item,
+        id: uuid(),
+        itemId: item.id,
+        quantity: 1
+      }
+      setCartItems([...cartItems, newtCartItem])
+    }
   };
+
+  // const addQuantity = () => {
+  // }
+
+  const reduceQuantity = () => {
+
+  }
 
   return (
     <div>
@@ -55,14 +85,29 @@ function RestaurantMenu() {
               </div>
 
               {/* ПРОВЕРИТЬ НАХОЖДЕНИЕ ПОЗИЦИИ В КОРЗИНЕ в cartItems */}
+
+              <div className="flex gap-4">
               { cartItems.find(cartItem => cartItem.itemId === item.id) ?
-                 ( <Link to={`/cart`}>
+                 ( 
+                 <div className="flex gap-6">
+                  
+
+                  <Link to={`/cart`}>
                     <Button
-                      title={"Перейти в корзину"}
+                      title={"В корзину"}
                       description={"Перейти в корзину"}
                       variant='default'
                     />
                   </Link>
+
+                  <Counter 
+                  count={cartItems.find(cartItem => cartItem.itemId === item.id).quantity}
+                  plus={() => addToCart(item)}
+                  minus={reduceQuantity}
+                  /> 
+                  </div>
+                 
+                 
                   ):
                   <Button 
                     title={"+ Добавить"} 
@@ -70,7 +115,10 @@ function RestaurantMenu() {
                     variant='default'
                     onClick={() => addToCart(item)}
                   />
+                  
               }
+              
+              </div>
             </div>
           );
         })}
