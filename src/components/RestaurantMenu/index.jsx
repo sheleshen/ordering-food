@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "components/Button";
 
 function RestaurantMenu() {
   const { slug } = useParams();
 
   const [items, setItems] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) || []);
 
   useEffect(() => {
     fetch(
@@ -17,11 +17,15 @@ function RestaurantMenu() {
       .then((data) => setItems(data));
   }, [slug]);
 
-  const addToCart = (item) => {
-    const updatedCartItems = [...cartItems, { ...item, quantity: 1 }];
-    setCartItems(updatedCartItems);
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems])
 
-    localStorage.getItem("cartItems", JSON.stringify(updatedCartItems));
+
+  // Добавить генерацию ID
+  const addToCart = (item) => {
+    const updatedCartItems = [...cartItems, { ...item, itemId: item.id, id:12, quantity: 1 }];
+    setCartItems(updatedCartItems);
   };
 
   return (
@@ -51,11 +55,12 @@ function RestaurantMenu() {
               </div>
 
               {/* ПРОВЕРИТЬ НАХОЖДЕНИЕ ПОЗИЦИИ В КОРЗИНЕ в cartItems */}
-              {/* { cartItem.id === id ?
-                 ( <Link to={`/card`}>
+              { cartItems.find(cartItem => cartItem.itemId === item.id) ?
+                 ( <Link to={`/cart`}>
                     <Button
                       title={"Перейти в корзину"}
                       description={"Перейти в корзину"}
+                      variant='default'
                     />
                   </Link>
                   ):
@@ -63,16 +68,9 @@ function RestaurantMenu() {
                     title={"+ Добавить"} 
                     description={"Добавить в корзину"}
                     variant='default'
-                    onClick='onClick'
+                    onClick={() => addToCart(item)}
                   />
-              } */}
-
-              <Button
-                title={"+ Добавить"}
-                description={"Добавить в корзину"}
-                variant="default"
-                onClick={() => addToCart(item)}
-              />
+              }
             </div>
           );
         })}
