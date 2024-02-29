@@ -30,6 +30,7 @@ function Cart() {
   };
 
   const reduceQuantity = (cartItem) => {
+    if (cartItem.quantity > 1) {
       const newCartItem = {
         ...cartItem,
         quantity: cartItem.quantity - 1
@@ -37,6 +38,7 @@ function Cart() {
 
       let newItems = cartItems.filter(c => c.itemId !== cartItem.itemId)
       setCartItems([...newItems, newCartItem])
+    }    
   };
 
 

@@ -66,13 +66,15 @@ function RestaurantMenu() {
     const currentCartItem = findCartItem(item)
     // Проверить наличие item в cartItems
     if(currentCartItem) {
-      const newCartItem = {
-        ...currentCartItem,
-        quantity: currentCartItem.quantity - 1
+      if (currentCartItem.quantity > 1) {
+        const newCartItem = {
+          ...currentCartItem,
+          quantity: currentCartItem.quantity - 1
+        }
+  
+        let newItems = cartItems.filter(cartItem => cartItem.itemId !== currentCartItem.itemId)
+        setCartItems([...newItems, newCartItem])
       }
-
-      let newItems = cartItems.filter(cartItem => cartItem.itemId !== currentCartItem.itemId)
-      setCartItems([...newItems, newCartItem])
     }
   };
 
