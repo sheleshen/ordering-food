@@ -6,10 +6,9 @@ import Counter from "components/Counter";
 // import ModalWindowError from "components/ModalWindowError";
 
 function Cart() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) || []);
 
   useEffect(() => {
-
     const cartItemsFromLS = localStorage.getItem('cartItems')
       if (cartItemsFromLS) {
         setCartItems(JSON.parse(cartItemsFromLS))

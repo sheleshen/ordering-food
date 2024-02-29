@@ -23,31 +23,40 @@ function RestaurantMenu() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems])
 
-  // const addToCart = (item) => {
+  const findCartItem = (menuItem) => {
+    return cartItems.find(c => c.itemId === menuItem.id)
+  }
+
+    // const addToCart = (item) => {
   //   const updatedCartItems = [...cartItems, { ...item, itemId: item.id, id:12, quantity: 1 }];
   //   setCartItems(updatedCartItems);
   // };
 
   const addToCart = (item) => {
-    const currentCartItem = cartItems.find(c => c.itemId === item.id)
+    // const currentCartItem = cartItems.find(c => c.itemId === item.id)
+    const currentCartItem = findCartItem(item)
 
+    // Проверить наличие item в cartItems
     if(currentCartItem) {
       const newCartItem = {
         ...currentCartItem,
         quantity: currentCartItem.quantity + 1
       }
 
-      // let newtItem = cartItems.filter(cartItem.itemId !== currentCartItem.itemId)
-      setCartItems([...cartItems, newCartItem])
+      let newtItem = cartItems.filter(item.Id !== currentCartItem.itemId)
+      // let newtItem = cartItems.filter(cartItem.Id !== currentCartItem.itemId)
+      setCartItems([...newtItem, newCartItem])
     } else {
 
-      const newtCartItem = {
+      const newCartItem = {
         ...item,
         id: uuid(),
         itemId: item.id,
         quantity: 1
       }
-      setCartItems([...cartItems, newtCartItem])
+      setCartItems([...cartItems, newCartItem])
+
+      // console.log("cartItems", cartItems)
     }
   };
 
