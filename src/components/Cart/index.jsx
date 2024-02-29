@@ -19,6 +19,7 @@ function Cart() {
     localStorage.getItem("cartItems", JSON.stringify(updatedCartItems));
   } 
 
+  // Нужен метод, чтобы товар оставался на том же месте slice?
   const addQuantity = (cartItem) => {
     const newCartItem = {
       ...cartItem,
