@@ -9,18 +9,35 @@ function Cart() {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) || []);
 
   useEffect(() => {
-    const cartItemsFromLS = localStorage.getItem('cartItems')
-      if (cartItemsFromLS) {
-        setCartItems(JSON.parse(cartItemsFromLS))
-      }
-  }, []);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems])
 
   const removeFromCart = (itemID) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemID)
     setCartItems(updatedCartItems)
 
     localStorage.getItem("cartItems", JSON.stringify(updatedCartItems));
-  }
+  } 
+
+  const addQuantity = (cartItem) => {
+    const newCartItem = {
+      ...cartItem,
+      quantity: cartItem.quantity + 1
+    }
+
+    let newItems = cartItems.filter(c => c.itemId !== cartItem.itemId)
+    setCartItems([...newItems, newCartItem])
+  };
+
+  const reduceQuantity = (cartItem) => {
+      const newCartItem = {
+        ...cartItem,
+        quantity: cartItem.quantity - 1
+      }
+
+      let newItems = cartItems.filter(c => c.itemId !== cartItem.itemId)
+      setCartItems([...newItems, newCartItem])
+  };
 
 
   return (
@@ -71,8 +88,10 @@ function Cart() {
                         Количество: 
                       </p>
                       <Counter 
-                        // count={cartItems.find(cartItem => cartItem.itemId === item.id).quantity}
-                      />
+                        count={item.quantity}
+                        addQuantity={() => addQuantity(item)}
+                        reduceQuantity={() => reduceQuantity(item)}
+                      /> 
                     </div>
                   
                   </div>
