@@ -3,7 +3,6 @@ import "./Cart.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Counter from "components/Counter";
-// import ModalWindowError from "components/ModalWindowError";
 import OrderForm from "components/OrderForm";
 import Modal from 'react-modal';
 
@@ -66,8 +65,7 @@ function Cart() {
 
   return (
     <div>
-      {/* ТЕСТ МОДАЛЬНОГО ОКНА - добавить на страницу ресторана */}
-      {/* <ModalWindowError /> */}
+      {/* ТЕСТ МОДАЛЬНОГО ОКНА*/}
       {/* <OrderForm /> */}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <OrderForm onClick={closeModal}/>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "components/Button";
 import Counter from "components/Counter";
 import uuid from "uuid4";
+import ModalWindowError from "components/ModalWindowError";
 
 function RestaurantMenu() {
   const { slug } = useParams();
@@ -35,31 +36,39 @@ function RestaurantMenu() {
   // };
 
   const addToCart = (item) => {
-    const currentCartItem = cartItems.find((c) => c.itemId === item.id);
-    // const currentCartItem = findCartItem(item)
 
-    // Проверить наличие item в cartItems
-    if (currentCartItem) {
-      const newCartItem = {
-        ...currentCartItem,
-        quantity: currentCartItem.quantity + 1,
-      };
+    if (item.restaurantId === cartItems[0].restaurantId) {
+      const currentCartItem = cartItems.find((c) => c.itemId === item.id);
+      // const currentCartItem = findCartItem(item)
 
-      let newItems = cartItems.filter(
-        (cartItem) => cartItem.itemId !== currentCartItem.itemId,
-      );
-      setCartItems([...newItems, newCartItem]);
-    } else {
-      const newCartItem = {
-        ...item,
-        id: uuid(),
-        itemId: item.id,
-        quantity: 1,
-      };
-      setCartItems([...cartItems, newCartItem]);
-      // console.log("cartItems", cartItems)
+      // Проверить наличие item в cartItems
+      if (currentCartItem) {
+        const newCartItem = {
+          ...currentCartItem,
+          quantity: currentCartItem.quantity + 1,
+        };
+
+        let newItems = cartItems.filter(
+          (cartItem) => cartItem.itemId !== currentCartItem.itemId,
+        );
+        setCartItems([...newItems, newCartItem]);
+      } else {
+        const newCartItem = {
+          ...item,
+          id: uuid(),
+          itemId: item.id,
+          quantity: 1,
+        };
+        setCartItems([...cartItems, newCartItem]);
+        // console.log("cartItems", cartItems)
+      }
     }
-  };
+
+    if (item.restaurantId !== cartItems[0].restaurantId) {
+      <ModalWindowError />
+    }
+      
+    };
 
   const reduceQuantity = (item) => {
     const currentCartItem = findCartItem(item);

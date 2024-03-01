@@ -1,6 +1,6 @@
 import "./OrderForm.css";
 import Button from "components/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // import { Link } from "react-router-dom";
 
 function OrderForm( {closeModal} ) {
@@ -9,11 +9,11 @@ function OrderForm( {closeModal} ) {
   );
   console.log(setCartItems)
 
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+  // useEffect(() => {
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  // }, [cartItems]);
 
-  console.log("cartItems", cartItems)
+  // console.log("cartItems", cartItems)
   
   return (
     // flex поменять на ! hidden !
@@ -99,12 +99,14 @@ function OrderForm( {closeModal} ) {
             />
           </div>
           <p class="text-xs font-medium text-slate-900 py-3 px-4 text-center border border-red-200 rounded-xl">
-            На электронную почту вам придёт подтверждение заказа. Ожидайте Ваш
-            заказ в ближайшее время!
+            На электронную почту вам придёт подтверждение заказа. Ожидайте Ваш заказ в ближайшее время!
           </p>
         </div>
         <div className="flex gap-4 justify-center">
-          <Button title="Отправить" variant="addsuccess" />
+          <Button 
+            title="Отправить" 
+            variant="addsuccess" 
+            />
           <Button 
             title="Отменить" 
             variant="delete" 
