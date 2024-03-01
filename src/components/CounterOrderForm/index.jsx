@@ -1,16 +1,16 @@
 import "./Counter.css";
-import CounterButton from "components/CounterButton";
+import CounterButtonOrderForm from "components/CounterButtonOrderForm";
 
-function Counter({ count, reduceQuantity, addQuantity }) {
+function CounterOrderForm({ count, reduceQuantity, addQuantity }) {
   return (
     <div className="flex gap-4 items-center">
-      <CounterButton
+      <CounterButtonOrderForm
         onClick={reduceQuantity}
         title="-"
         description="Уменьшить количество"
       />
       <p className="text-slate-900 font-bold">{count}</p>
-      <CounterButton
+      <CounterButtonOrderForm
         onClick={addQuantity}
         title="+"
         description="Увеличить количество"
@@ -19,4 +19,4 @@ function Counter({ count, reduceQuantity, addQuantity }) {
   );
 }
 
-export default Counter;
+export default CounterOrderForm;

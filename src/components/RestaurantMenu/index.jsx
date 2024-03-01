@@ -9,7 +9,9 @@ function RestaurantMenu() {
   const { slug } = useParams();
 
   const [items, setItems] = useState([]);
-  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) || []);
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("cartItems")) || [],
+  );
 
   useEffect(() => {
     fetch(
@@ -21,59 +23,58 @@ function RestaurantMenu() {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems])
+  }, [cartItems]);
 
   const findCartItem = (menuItem) => {
-    return cartItems.find(c => c.itemId === menuItem.id)
-  }
+    return cartItems.find((c) => c.itemId === menuItem.id);
+  };
 
-    // const addToCart = (item) => {
+  // const addToCart = (item) => {
   //   const updatedCartItems = [...cartItems, { ...item, itemId: item.id, id:12, quantity: 1 }];
   //   setCartItems(updatedCartItems);
   // };
 
   const addToCart = (item) => {
-    const currentCartItem = cartItems.find(c => c.itemId === item.id)
+    const currentCartItem = cartItems.find((c) => c.itemId === item.id);
     // const currentCartItem = findCartItem(item)
 
     // Проверить наличие item в cartItems
-    if(currentCartItem) {
+    if (currentCartItem) {
       const newCartItem = {
         ...currentCartItem,
-        quantity: currentCartItem.quantity + 1
-      }
+        quantity: currentCartItem.quantity + 1,
+      };
 
-      let newItems = cartItems.filter(cartItem => cartItem.itemId !== currentCartItem.itemId)
-      setCartItems([...newItems, newCartItem])
+      let newItems = cartItems.filter(
+        (cartItem) => cartItem.itemId !== currentCartItem.itemId,
+      );
+      setCartItems([...newItems, newCartItem]);
     } else {
-
       const newCartItem = {
         ...item,
         id: uuid(),
         itemId: item.id,
-        quantity: 1
-      }
-      setCartItems([...cartItems, newCartItem])
-
+        quantity: 1,
+      };
+      setCartItems([...cartItems, newCartItem]);
       // console.log("cartItems", cartItems)
     }
   };
 
-  // const addQuantity = () => {
-  // }
-
   const reduceQuantity = (item) => {
-    const currentCartItem = findCartItem(item)
+    const currentCartItem = findCartItem(item);
     // Проверить наличие item в cartItems
-    if(currentCartItem) {
+    if (currentCartItem) {
       if (currentCartItem.quantity > 1) {
         const newCartItem = {
           ...currentCartItem,
-          quantity: currentCartItem.quantity - 1
-        }
-  
-        let newItems = cartItems.filter(cartItem => cartItem.itemId !== currentCartItem.itemId)
-        setCartItems([...newItems, newCartItem])
+          quantity: currentCartItem.quantity - 1,
+        };
+
+        let newItems = cartItems.filter(
+          (cartItem) => cartItem.itemId !== currentCartItem.itemId,
+        );
+        setCartItems([...newItems, newCartItem]);
       }
     }
   };
@@ -103,39 +104,35 @@ function RestaurantMenu() {
                   {item.description}
                 </p>
               </div>
-
               <div className="flex gap-4">
-              { cartItems.find(cartItem => cartItem.itemId === item.id) ?
-                 ( 
-                 <div className="flex gap-6">
-                  
+                {cartItems.find((cartItem) => cartItem.itemId === item.id) ? (
+                  <div className="flex gap-6">
+                    <Link to={`/cart`}>
+                      <Button
+                        title={"В корзину"}
+                        description={"Перейти в корзину"}
+                        variant="default"
+                      />
+                    </Link>
 
-                  <Link to={`/cart`}>
-                    <Button
-                      title={"В корзину"}
-                      description={"Перейти в корзину"}
-                      variant='default'
+                    <Counter
+                      count={
+                        cartItems.find(
+                          (cartItem) => cartItem.itemId === item.id,
+                        ).quantity
+                      }
+                      addQuantity={() => addToCart(item)}
+                      reduceQuantity={() => reduceQuantity(item)}
                     />
-                  </Link>
-
-                  <Counter 
-                  count={cartItems.find(cartItem => cartItem.itemId === item.id).quantity}
-                  addQuantity={() => addToCart(item)}
-                  reduceQuantity={() => reduceQuantity(item)}
-                  /> 
                   </div>
-                 
-                 
-                  ):
-                  <Button 
-                    title={"+ Добавить"} 
+                ) : (
+                  <Button
+                    title={"+ Добавить"}
                     description={"Добавить в корзину"}
-                    variant='default'
+                    variant="default"
                     onClick={() => addToCart(item)}
                   />
-                  
-              }
-              
+                )}
               </div>
             </div>
           );
