@@ -1,13 +1,13 @@
 import "./OrderForm.css";
-import ButtonOrderForm from "components/ButtonOrderForm";
 import Button from "components/Button";
 import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 
-function OrderForm() {
+function OrderForm( {closeModal} ) {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || [],
   );
+  console.log(setCartItems)
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -105,7 +105,11 @@ function OrderForm() {
         </div>
         <div className="flex gap-4 justify-center">
           <Button title="Отправить" variant="addsuccess" />
-          <Button title="Отменить" variant="delete" />
+          <Button 
+            title="Отменить" 
+            variant="delete" 
+            onClick={closeModal}
+          />
         </div>
       </div>
     </div>

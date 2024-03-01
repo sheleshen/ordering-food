@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Counter from "components/Counter";
 // import ModalWindowError from "components/ModalWindowError";
 import OrderForm from "components/OrderForm";
+import Modal from 'react-modal';
 
 function Cart() {
   const [cartItems, setCartItems] = useState(
@@ -45,11 +46,32 @@ function Cart() {
     }
   };
 
+  // состояние для открытия и закрытия модального окна
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  // содержимое модального окна
+  // const modalContent = (
+  //   <div>
+  //     <OrderForm onClick={closeModal}/>
+  //   </div>
+  // );
+
   return (
     <div>
       {/* ТЕСТ МОДАЛЬНОГО ОКНА - добавить на страницу ресторана */}
       {/* <ModalWindowError /> */}
-      <OrderForm />
+      {/* <OrderForm /> */}
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <OrderForm onClick={closeModal}/>
+      </Modal>
 
       {cartItems.length === 0 ? (
         <div className="px-6 md:px-4 lg:px-2 xl:px-0 py-28 md:py-32 lg:py-40 max-w-7xl m-auto ">
@@ -120,7 +142,7 @@ function Cart() {
               description={"Оформить заказ"}
               variant="default"
               // Вызываем модальное окно
-              // onClick={() => }
+              onClick={() => openModal}
             />
           </div>
         </div>
