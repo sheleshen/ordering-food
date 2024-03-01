@@ -1,19 +1,41 @@
 import "./OrderForm.css";
 import Button from "components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 
 function OrderForm( {closeModal} ) {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || [],
   );
-  console.log(setCartItems)
 
-  // useEffect(() => {
-  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  // }, [cartItems]);
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
-  // console.log("cartItems", cartItems)
+  console.log("cartItems", cartItems, setCartItems)
+
+  // Для полей
+  const [customerName, setCustomerName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+
+  // Отправить заказ - пока не работает
+  const sendOrder = () => {
+    const requestBody = {
+      customerName,
+      phone,
+      email,
+      restaurantId: cartItems.restaurantId,
+      cartItems: [
+        { itemId: 2, quantity: 1, price: 400 },
+      ]
+    }
+
+    console.log(requestBody)
+  }
+
+  console.log(sendOrder)
+
   
   return (
     // flex поменять на ! hidden !
@@ -68,37 +90,43 @@ function OrderForm( {closeModal} ) {
               Фамилия Имя <span class="text-rose-400">*</span>
             </p>
             <input
-              id="customerName"
+              value={customerName}
+              onChange={(event) => setCustomerName(event.target.value)}
+              name='customerName'
               type="text"
               placeholder="Введите фамилию и имя"
-              class="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
+              className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
             />
           </div>
 
-          <div class="flex flex-col gap-1">
-            <p class="text-sm font-medium text-slate-500">
-              Телефон для связи <span class="text-rose-400">*</span>
+          <div className="flex flex-col gap-1">
+            <p className="text-sm font-medium text-slate-500">
+              Телефон для связи <span className="text-rose-400">*</span>
             </p>
             <input
-              id="phone"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              name='phone'
               type="text"
               placeholder="Введите телефон"
-              class="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
+              className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
             />
           </div>
 
-          <div class="flex flex-col gap-1">
-            <p class="text-sm font-medium text-slate-500">
-              E-mail <span class="text-rose-400">*</span>
+          <div className="flex flex-col gap-1">
+            <p className="text-sm font-medium text-slate-500">
+              E-mail <span className="text-rose-400">*</span>
             </p>
             <input
-              id="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              name='email'
               type="text"
               placeholder="Введите e-mail"
-              class="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
+              className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
             />
           </div>
-          <p class="text-xs font-medium text-slate-900 py-3 px-4 text-center border border-red-200 rounded-xl">
+          <p className="text-xs font-medium text-slate-900 py-3 px-4 text-center border border-red-200 rounded-xl">
             На электронную почту вам придёт подтверждение заказа. Ожидайте Ваш заказ в ближайшее время!
           </p>
         </div>
@@ -110,7 +138,7 @@ function OrderForm( {closeModal} ) {
           <Button 
             title="Отменить" 
             variant="delete" 
-            onClick={closeModal}
+            onClick={() => closeModal()}
           />
         </div>
       </div>

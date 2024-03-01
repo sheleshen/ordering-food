@@ -15,6 +15,10 @@ function Cart() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
+// нужно посчитать сумму товара и количества
+// const [totalAmount, setTotalAmount] = useState
+// ? sum + Math.round(item.price)
+
   const removeFromCart = (itemID) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemID);
     setCartItems(updatedCartItems);

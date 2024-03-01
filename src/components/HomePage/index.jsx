@@ -13,10 +13,6 @@ function HomePage() {
       .then((data) => setRestaurants(data));
   }, []);
 
-  // console.log(setRestaurants);
-  // console.log("restaurants");
-  // console.log(restaurants);
-
   return (
     <div>
       {/* Тут будет баннер */}

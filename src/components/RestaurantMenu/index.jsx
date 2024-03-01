@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "components/Button";
 import Counter from "components/Counter";
 import uuid from "uuid4";
-import ModalWindowError from "components/ModalWindowError";
+// import ModalWindowError from "components/ModalWindowError";
 
 function RestaurantMenu() {
   const { slug } = useParams();
@@ -37,7 +37,8 @@ function RestaurantMenu() {
 
   const addToCart = (item) => {
 
-    if (item.restaurantId === cartItems[0].restaurantId) {
+    // добавить условие про пустую корзину
+    // if (item.restaurantId === cartItems[0].restaurantId || cartItems.length === 0) {
       const currentCartItem = cartItems.find((c) => c.itemId === item.id);
       // const currentCartItem = findCartItem(item)
 
@@ -52,6 +53,7 @@ function RestaurantMenu() {
           (cartItem) => cartItem.itemId !== currentCartItem.itemId,
         );
         setCartItems([...newItems, newCartItem]);
+        console.log("Добавим n-товар!", cartItems.length)
       } else {
         const newCartItem = {
           ...item,
@@ -60,13 +62,14 @@ function RestaurantMenu() {
           quantity: 1,
         };
         setCartItems([...cartItems, newCartItem]);
-        // console.log("cartItems", cartItems)
+        console.log("Добавим первый товар!", cartItems.length)
       }
-    }
+    // } else 
+    // console.log(cartItems.length)
 
-    if (item.restaurantId !== cartItems[0].restaurantId) {
-      <ModalWindowError />
-    }
+    // if (item.restaurantId !== cartItems[0].restaurantId) {
+    //   <ModalWindowError />
+    // }
       
     };
 
