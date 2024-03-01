@@ -10,22 +10,14 @@ function ModalWindowError() {
         <p className="text-lg md:text-xl lg:text-2xl pb-1 md:pb-2 font-bold text-rose-500">
           В вашей корзине уже есть товары из другого ресторана!
         </p>
-        {/* Предложение удалить позиции в корзине (кнопка перейти в корзину) 
-                Либо тут вывести товары из корзины с кнопками удаления*/}
         <p className="text-sm md:text-base font-medium text-slate-600">
           Вы можете удалить позиции и сделать новый заказ
         </p>
         <Link to={`/cart`}>
-          <Button
-            title="Перейти в козину"
-            variant="default"
-          />
+          <Button title="Перейти в козину" variant="default" />
         </Link>
 
-        <Button
-          title="Отмена"
-          variant="delete"
-        />
+        <Button title="Остаться" variant="delete" />
       </div>
     </div>
   );

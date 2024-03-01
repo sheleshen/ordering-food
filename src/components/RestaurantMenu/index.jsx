@@ -36,42 +36,41 @@ function RestaurantMenu() {
   // };
 
   const addToCart = (item) => {
-
     // добавить условие про пустую корзину
-    // if (item.restaurantId === cartItems[0].restaurantId || cartItems.length === 0) {
-      const currentCartItem = cartItems.find((c) => c.itemId === item.id);
-      // const currentCartItem = findCartItem(item)
+    // if (item.restaurantId === cartItems[0].restaurantId || cartItems.length == 0) {
+    const currentCartItem = cartItems.find((c) => c.itemId === item.id);
+    // const currentCartItem = findCartItem(item)
 
-      // Проверить наличие item в cartItems
-      if (currentCartItem) {
-        const newCartItem = {
-          ...currentCartItem,
-          quantity: currentCartItem.quantity + 1,
-        };
+    // Проверить наличие item в cartItems
+    if (currentCartItem) {
+      const newCartItem = {
+        ...currentCartItem,
+        quantity: currentCartItem.quantity + 1,
+      };
 
-        let newItems = cartItems.filter(
-          (cartItem) => cartItem.itemId !== currentCartItem.itemId,
-        );
-        setCartItems([...newItems, newCartItem]);
-        console.log("Добавим n-товар!", cartItems.length)
-      } else {
-        const newCartItem = {
-          ...item,
-          id: uuid(),
-          itemId: item.id,
-          quantity: 1,
-        };
-        setCartItems([...cartItems, newCartItem]);
-        console.log("Добавим первый товар!", cartItems.length)
-      }
-    // } else 
-    // console.log(cartItems.length)
+      let newItems = cartItems.filter(
+        (cartItem) => cartItem.itemId !== currentCartItem.itemId,
+      );
+      setCartItems([...newItems, newCartItem]);
+      console.log("Добавим n-товар!", cartItems.length, item.restaurantId);
+    } else {
+      const newCartItem = {
+        ...item,
+        id: uuid(),
+        itemId: item.id,
+        quantity: 1,
+      };
+      setCartItems([...cartItems, newCartItem]);
+      console.log("Добавим первый товар!", cartItems.length);
+    }
+    // } else
+    // console.log("Ничего не дообавим!", "cartItems.length", cartItems.length, "item.restaurantId", item.restaurantId)
 
     // if (item.restaurantId !== cartItems[0].restaurantId) {
     //   <ModalWindowError />
+    //   console.log("Ничего не дообавим!", cartItems.length)
     // }
-      
-    };
+  };
 
   const reduceQuantity = (item) => {
     const currentCartItem = findCartItem(item);

@@ -3,7 +3,7 @@ import Button from "components/Button";
 import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 
-function OrderForm( {closeModal} ) {
+function OrderForm({ closeModal }) {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || [],
   );
@@ -12,12 +12,12 @@ function OrderForm( {closeModal} ) {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  console.log("cartItems", cartItems, setCartItems)
+  console.log("cartItems", cartItems, setCartItems);
 
   // Для полей
-  const [customerName, setCustomerName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
+  const [customerName, setCustomerName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
 
   // Отправить заказ - пока не работает
   const sendOrder = () => {
@@ -26,17 +26,14 @@ function OrderForm( {closeModal} ) {
       phone,
       email,
       restaurantId: cartItems.restaurantId,
-      cartItems: [
-        { itemId: 2, quantity: 1, price: 400 },
-      ]
-    }
+      cartItems: [{ itemId: 2, quantity: 1, price: 400 }],
+    };
 
-    console.log(requestBody)
-  }
+    console.log(requestBody);
+  };
 
-  console.log(sendOrder)
+  console.log(sendOrder);
 
-  
   return (
     // flex поменять на ! hidden !
     <div className="modal-window fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center">
@@ -46,101 +43,103 @@ function OrderForm( {closeModal} ) {
         </p>
 
         <div className="flex flex-col gap-10">
-            <div className="flex flex-col px-5 py-5 gap-4 bg-slate-100 rounded-3xl justify-between">
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between items-center"
-                >
-                  <div className="flex gap-5">
-                    <img
-                      alt=""
-                      src={item.image}
-                      className=" object-cover object-center lg:w-32 lg:h-32 md:w-24 md:h-24 w-20 rounded-3xl"
-                    ></img>
-                    <div className="flex flex-col gap-1">
-                      <p className="text-lg md:text-xl lg:text-2xl pb-1 md:pb-2 font-bold text-slate-800">
-                        {item.name}
+          <div className="flex flex-col px-5 py-5 gap-4 bg-slate-100 rounded-3xl justify-between">
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex justify-between items-center">
+                <div className="flex gap-5">
+                  <img
+                    alt=""
+                    src={item.image}
+                    className=" object-cover object-center lg:w-32 lg:h-32 md:w-24 md:h-24 w-20 rounded-3xl"
+                  ></img>
+                  <div className="flex flex-col gap-1">
+                    <p className="text-lg md:text-xl lg:text-2xl pb-1 md:pb-2 font-bold text-slate-800">
+                      {item.name}
+                    </p>
+                    <p className="text-sm md:text-base font-bold text-amber-500">
+                      Цена: {item.price} руб.
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <p className="text-sm md:text-base font-medium text-slate-600">
+                        Количество: {item.quantity}
                       </p>
-                      <p className="text-sm md:text-base font-bold text-amber-500">
-                        Цена: {item.price} руб.
-                      </p>
-                      <div className="flex flex-col gap-2">
-                        <p className="text-sm md:text-base font-medium text-slate-600">
-                          Количество: {item.quantity}
-                        </p>
-                      </div>
                     </div>
                   </div>
-                  {/* <div className="flex flex-col gap-2">
+                </div>
+                {/* <div className="flex flex-col gap-2">
                     <ButtonOrderForm
                       onClick={() => removeFromCart(item.id)}
                       title={"Удалить"}
                       variant="delete"
                     />
                   </div> */}
-                </div>
-              ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <form action="">
+          <div className="flex flex-col gap-4">
+            <div class="flex flex-col gap-1">
+              <p class="text-sm font-medium text-slate-500">
+                Фамилия Имя <span class="text-rose-400">*</span>
+              </p>
+              <input
+                value={customerName}
+                onChange={(event) => setCustomerName(event.target.value)}
+                name="customerName"
+                type="text"
+                placeholder="Введите фамилию и имя"
+                className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
+              />
             </div>
-        </div>
 
-        <div className="flex flex-col gap-4">
-          <div class="flex flex-col gap-1">
-            <p class="text-sm font-medium text-slate-500">
-              Фамилия Имя <span class="text-rose-400">*</span>
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-medium text-slate-500">
+                Телефон для связи <span className="text-rose-400">*</span>
+              </p>
+              <input
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+                name="phone"
+                type="text"
+                placeholder="Введите телефон"
+                className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-medium text-slate-500">
+                E-mail <span className="text-rose-400">*</span>
+              </p>
+              <input
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                name="email"
+                type="text"
+                placeholder="Введите e-mail"
+                className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
+              />
+            </div>
+            <p className="text-xs font-medium text-slate-900 py-3 px-4 text-center border border-red-200 rounded-xl">
+              На электронную почту вам придёт подтверждение заказа. Ожидайте Ваш
+              заказ в ближайшее время!
             </p>
-            <input
-              value={customerName}
-              onChange={(event) => setCustomerName(event.target.value)}
-              name='customerName'
-              type="text"
-              placeholder="Введите фамилию и имя"
-              className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
+          </div>
+          <div className="flex gap-4 justify-center">
+            <Button
+              title="Отправить"
+              variant="addsuccess"
+              // type="submit"
+              // onClick={(event) => sendOrder(event)}
+            />
+            <Button
+              title="Отменить"
+              variant="delete"
+              onClick={() => closeModal()}
             />
           </div>
-
-          <div className="flex flex-col gap-1">
-            <p className="text-sm font-medium text-slate-500">
-              Телефон для связи <span className="text-rose-400">*</span>
-            </p>
-            <input
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-              name='phone'
-              type="text"
-              placeholder="Введите телефон"
-              className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <p className="text-sm font-medium text-slate-500">
-              E-mail <span className="text-rose-400">*</span>
-            </p>
-            <input
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              name='email'
-              type="text"
-              placeholder="Введите e-mail"
-              className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
-            />
-          </div>
-          <p className="text-xs font-medium text-slate-900 py-3 px-4 text-center border border-red-200 rounded-xl">
-            На электронную почту вам придёт подтверждение заказа. Ожидайте Ваш заказ в ближайшее время!
-          </p>
-        </div>
-        <div className="flex gap-4 justify-center">
-          <Button 
-            title="Отправить" 
-            variant="addsuccess" 
-            />
-          <Button 
-            title="Отменить" 
-            variant="delete" 
-            onClick={() => closeModal()}
-          />
-        </div>
+        </form>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Counter from "components/Counter";
 import OrderForm from "components/OrderForm";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 
 function Cart() {
   const [cartItems, setCartItems] = useState(
@@ -15,9 +15,9 @@ function Cart() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-// нужно посчитать сумму товара и количества
-// const [totalAmount, setTotalAmount] = useState
-// ? sum + Math.round(item.price)
+  // нужно посчитать сумму товара и количества
+  // const [totalAmount, setTotalAmount] = useState
+  // ? sum + Math.round(item.price)
 
   const removeFromCart = (itemID) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemID);
@@ -72,7 +72,7 @@ function Cart() {
       {/* ТЕСТ МОДАЛЬНОГО ОКНА*/}
       {/* <OrderForm /> */}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <OrderForm onClick={closeModal}/>
+        <OrderForm onClick={closeModal} />
       </Modal>
 
       {cartItems.length === 0 ? (
