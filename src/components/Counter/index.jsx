@@ -1,4 +1,3 @@
-import "./Counter.css";
 import CounterButton from "components/CounterButton";
 
 function Counter({ count, reduceQuantity, addQuantity }) {

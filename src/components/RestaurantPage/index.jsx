@@ -16,7 +16,7 @@ function RestaurantPage() {
       .then((data) => setRestaurant(data));
 
     fetch(
-      `https://www.bit-by-bit.ru/api/student-projects/restaurants/${slug}/item`,
+      `https://www.bit-by-bit.ru/api/student-projects/restaurants/${slug}/items`,
     )
       .then((response) => response.json())
       .then((data) => setMenuItems(data));
@@ -45,7 +45,7 @@ function RestaurantPage() {
             </p>
             <span className="text-sm md:text-base font-medium text-slate-400">
               {restaurant.openAt && restaurant.closeAt
-                ? `Часы работы:${format(new Date(restaurant.openAt), "HH:mm")} - ${format(new Date(), "HH:mm")}`
+                ? `Часы работы: ${format(new Date(restaurant.openAt), "HH:mm")} - ${format(new Date(restaurant.closeAt), "HH:mm")}`
                 : "Часы работы не указаны"}
             </span>
             <p className="text-sm md:text-base font-medium text-slate-800">

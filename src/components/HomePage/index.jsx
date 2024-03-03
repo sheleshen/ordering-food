@@ -54,7 +54,7 @@ function HomePage() {
                   </p>
                   <span className="text-sm md:text-base font-medium text-slate-600">
                     {restaurant.openAt && restaurant.closeAt
-                      ? `Часы работы:${format(new Date(restaurant.openAt), "HH:mm")} - ${format(new Date(), "HH:mm")}`
+                      ? `Часы работы: ${format(new Date(restaurant.openAt), "HH:mm")} - ${format(new Date(restaurant.closeAt), "HH:mm")}`
                       : "Часы работы не указаны"}
                   </span>
                   <p className="text-sm md:text-base font-medium text-slate-600">
