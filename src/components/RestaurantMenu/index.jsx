@@ -100,20 +100,19 @@ function RestaurantMenu() {
       }
     };
 
+    const ClearCart = () => {
+      setCartItems([])
+      setError(false)
+    }
 
-    // const ClearCart = () => {
-    //   setCartItems([])
-    //   setError(false)
-    // }
-
-    // const closeModal = () => {
-    //   setError(false)
-    // }
+    const closeModal = () => {
+      setError(false)
+    }
 
   return (
     <div>
       {items.length === 0 ? (
-        <ModalWindowError />
+        <div>ТРИТАТИШКИ ТРИЛЯЛЯ</div>
       ) : (
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((item) => {
@@ -164,7 +163,7 @@ function RestaurantMenu() {
                     title={"+ Добавить"}
                     description={"Добавить в корзину"}
                     variant="default"
-                    onClick={() => addToCart(item)}
+                    onClick={() => addToCart(item, item.restaurantId)}
                   />
                 )}
               </div>
@@ -173,7 +172,7 @@ function RestaurantMenu() {
         })}
       </div>
       )}
-      
+      {error && <ModalWindowError ClearCart={ClearCart} closeModal={closeModal} />}
     </div>
   );
 }
