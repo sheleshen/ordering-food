@@ -8,7 +8,7 @@ function HomePage() {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    fetch("https://www.bit-by-bit.ru/api/student-projects/restaurants")
+    fetch(`https://www.bit-by-bit.ru/api/student-projects/restaurants`)
       .then((response) => response.json())
       .then((data) => setRestaurants(data));
   }, []);

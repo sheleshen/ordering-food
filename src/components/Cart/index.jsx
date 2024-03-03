@@ -9,31 +9,32 @@ function Cart() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || [],
   );
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false); // состояние для открытия и закрытия модального окна
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    let total = 0;
+    cartItems.forEach((item) => {
+      total += item.price * item.quantity;
+      setTotalAmount(total);
+    });
   }, [cartItems]);
-
-  // нужно посчитать сумму товара и количества
-  // const [totalAmount, setTotalAmount] = useState
-  // ? sum + Math.round(item.price)
 
   const removeFromCart = (itemID) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemID);
     setCartItems(updatedCartItems);
-
-    localStorage.getItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
-  // Нужен метод, чтобы товар оставался на том же месте slice?
   const addQuantity = (cartItem) => {
     const newCartItem = {
       ...cartItem,
       quantity: cartItem.quantity + 1,
     };
-
-    let newItems = cartItems.filter((c) => c.itemId !== cartItem.itemId);
-    setCartItems([...newItems, newCartItem]);
+    let newItems = cartItems.map((item) =>
+      item.id === cartItem.itemId ? newCartItem : item,
+    );
+    setCartItems(newItems);
   };
 
   const reduceQuantity = (cartItem) => {
@@ -42,14 +43,12 @@ function Cart() {
         ...cartItem,
         quantity: cartItem.quantity - 1,
       };
-
-      let newItems = cartItems.filter((c) => c.itemId !== cartItem.itemId);
-      setCartItems([...newItems, newCartItem]);
+      let newItems = cartItems.map((item) =>
+        item.id === cartItem.itemId ? newCartItem : item,
+      );
+      setCartItems(newItems);
     }
   };
-
-  // состояние для открытия и закрытия модального окна
-  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -59,19 +58,14 @@ function Cart() {
     setModalIsOpen(false);
   };
 
-  // содержимое модального окна
-  // const modalContent = (
-  //   <div>
-  //     <OrderForm onClick={closeModal}/>
-  //   </div>
-  // );
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
   return (
     <div>
-      {/* ТЕСТ МОДАЛЬНОГО ОКНА*/}
-      {/* <OrderForm /> */}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <OrderForm onClick={closeModal} />
+        <OrderForm closeModal={closeModal} cartItems={cartItems} clearCart={clearCart} />
       </Modal>
 
       {cartItems.length === 0 ? (
@@ -112,8 +106,12 @@ function Cart() {
                       <p className="text-xl md:text-2xl lg:text-3xl pb-2 md:pb-3 font-bold text-slate-800">
                         {item.name}
                       </p>
-                      <p className="text-base md:text-lg font-bold text-amber-500">
+                      <p className="text-sm md:text-base font-medium text-slate-600">
                         Цена: {item.price} руб.
+                      </p>
+                      <p className="text-base md:text-lg font-bold text-amber-500">
+                        Общая стоимость:{" "}
+                        {(item.price * item.quantity).toFixed(2)} руб.
                       </p>
                       <div className="flex flex-col gap-2">
                         <p className="text-sm md:text-base font-medium text-slate-600">
@@ -137,13 +135,16 @@ function Cart() {
                 </div>
               ))}
             </div>
+            <p className="text-xl md:text-2xl lg:text-3xl pb-2 md:pb-3 font-bold text-slate-800">
+              Общая стоимость заказа: {totalAmount.toFixed(2)} руб.
+            </p>
 
             <Button
               title={"Оформить заказ"}
               description={"Оформить заказ"}
               variant="default"
               // Вызываем модальное окно
-              onClick={() => openModal}
+              onClick={() => openModal()}
             />
           </div>
         </div>

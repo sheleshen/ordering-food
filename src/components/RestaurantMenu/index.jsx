@@ -30,7 +30,6 @@ function RestaurantMenu() {
     return cartItems.find((c) => c.itemId === item.id);
   };
 
-  // Заминка либо не работает
   const clearCart = () => {
     console.log("Очистить корзину");
     setCartItems([]);
