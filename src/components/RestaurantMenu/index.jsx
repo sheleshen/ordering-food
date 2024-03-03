@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "components/Button";
 import Counter from "components/Counter";
 import uuid from "uuid4";
-// import ModalWindowError from "components/ModalWindowError";
+import ModalWindowError from "components/ModalWindowError";
 
 function RestaurantMenu() {
   const { slug } = useParams();
@@ -13,6 +13,8 @@ function RestaurantMenu() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || [],
   );
+  const [error, setError] = useState[false];
+  console.log(error)
 
   useEffect(() => {
     fetch(
@@ -26,50 +28,53 @@ function RestaurantMenu() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const findCartItem = (menuItem) => {
-    return cartItems.find((c) => c.itemId === menuItem.id);
+  const findCartItem = (item) => {
+    return cartItems.find((c) => c.itemId === item.id);
   };
 
-  // const addToCart = (item) => {
-  //   const updatedCartItems = [...cartItems, { ...item, itemId: item.id, id:12, quantity: 1 }];
-  //   setCartItems(updatedCartItems);
-  // };
+  const addToCart = (item, currentRestaurantId) => {
+   // if (item.restaurantId === cartItems[0].restaurantId || cartItems.length == 0) {
+    const currentCartItem = findCartItem(item);
 
-  const addToCart = (item) => {
-    // добавить условие про пустую корзину
-    // if (item.restaurantId === cartItems[0].restaurantId || cartItems.length == 0) {
-    const currentCartItem = cartItems.find((c) => c.itemId === item.id);
-    // const currentCartItem = findCartItem(item)
+    if (!currentCartItem) {
+      let itemFromOtherRes = false
 
-    // Проверить наличие item в cartItems
+      for(let i = 0; i < cartItems.length; i++) {
+        const cartItem = cartItems[i]
+
+        if(cartItem.restaurantId !== currentRestaurantId && cartItem.quantity > 0) {
+          itemFromOtherRes = true
+          break
+        }
+      }
+
+      if(itemFromOtherRes) {
+        setError(true)
+        return
+      }
+    }
+
     if (currentCartItem) {
       const newCartItem = {
         ...currentCartItem,
         quantity: currentCartItem.quantity + 1,
       };
 
-      let newItems = cartItems.filter(
-        (cartItem) => cartItem.itemId !== currentCartItem.itemId,
+      let newItems = cartItems.map(
+        cartItem => cartItem.itemId === currentCartItem.itemId ? newCartItem : cartItem
       );
-      setCartItems([...newItems, newCartItem]);
-      console.log("Добавим n-товар!", cartItems.length, item.restaurantId);
+      setCartItems(newItems);
+
     } else {
       const newCartItem = {
         ...item,
         id: uuid(),
         itemId: item.id,
         quantity: 1,
+        restaurantId: item.restaurantId
       };
       setCartItems([...cartItems, newCartItem]);
-      console.log("Добавим первый товар!", cartItems.length);
     }
-    // } else
-    // console.log("Ничего не дообавим!", "cartItems.length", cartItems.length, "item.restaurantId", item.restaurantId)
-
-    // if (item.restaurantId !== cartItems[0].restaurantId) {
-    //   <ModalWindowError />
-    //   console.log("Ничего не дообавим!", cartItems.length)
-    // }
   };
 
   const reduceQuantity = (item) => {
@@ -81,18 +86,36 @@ function RestaurantMenu() {
           ...currentCartItem,
           quantity: currentCartItem.quantity - 1,
         };
-
-        let newItems = cartItems.filter(
-          (cartItem) => cartItem.itemId !== currentCartItem.itemId,
+        let newItems = cartItems.map(
+          cartItem => cartItem.itemId === currentCartItem.itemId ? newCartItem : cartItem
         );
-        setCartItems([...newItems, newCartItem]);
+        setCartItems(newItems);
+      } else {
+        let newItems = cartItems.filter(
+          cartItem => cartItem.itemId !== currentCartItem.itemId
+        );
+        setCartItems(newItems);
       }
-    }
-  };
+        
+      }
+    };
+
+
+    // const ClearCart = () => {
+    //   setCartItems([])
+    //   setError(false)
+    // }
+
+    // const closeModal = () => {
+    //   setError(false)
+    // }
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {items.length === 0 ? (
+        <ModalWindowError />
+      ) : (
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((item) => {
           return (
             <div
@@ -149,6 +172,8 @@ function RestaurantMenu() {
           );
         })}
       </div>
+      )}
+      
     </div>
   );
 }

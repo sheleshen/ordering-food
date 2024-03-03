@@ -6,24 +6,13 @@ import { format } from "date-fns";
 function RestaurantPage() {
   const { slug } = useParams();
 
-  const [restaurant, setRestaurant] = useState({});
-  const [menuItems, setMenuItems] = useState([]);
-  console.log(menuItems);
+  const [restaurant, setRestaurant] = useState([]);
 
   useEffect(() => {
     fetch(`https://www.bit-by-bit.ru/api/student-projects/restaurants/${slug}`)
       .then((response) => response.json())
       .then((data) => setRestaurant(data));
-
-    fetch(
-      `https://www.bit-by-bit.ru/api/student-projects/restaurants/${slug}/items`,
-    )
-      .then((response) => response.json())
-      .then((data) => setMenuItems(data));
   }, [slug]);
-
-  //     console.log(setRestaurants);setRestaurants(data));
-  console.log(restaurant);
 
   return (
     <div className="px-6 md:px-4 lg:px-2 xl:px-0 py-10 md:py-12 lg:py-14 max-w-7xl m-auto">
@@ -69,7 +58,7 @@ function RestaurantPage() {
       <p className="text-3xl md:text-4xl lg:text-5xl font-bold py-10 md:py-12 lg:py-14">
         Меню ресторана:
       </p>
-      <RestaurantMenu items={menuItems} />
+      <RestaurantMenu />
     </div>
   );
 }
