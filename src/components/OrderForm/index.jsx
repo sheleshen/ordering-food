@@ -7,7 +7,7 @@ function OrderForm( {closeModal, cartItems, clearCart, restaurantId} ) {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [errorInput, setErrorInput] = useState(false)
-  console.log("Ошибка поля", errorInput)
+  // console.log("Ошибка поля", errorInput)
 
   // Отправить заказ
   const handleSubmitForm = (event) => {
@@ -97,9 +97,9 @@ function OrderForm( {closeModal, cartItems, clearCart, restaurantId} ) {
                 placeholder="Введите фамилию и имя"
                 className="py-3 px-4 bg-slate-100 rounded-xl text-slate-900 outline-0 text-base"
               />
-              {/* {errorInput && 
+              {errorInput && 
                   <p className="text-sm text-rose-400">Заполните поле</p>
-                } */}
+                }
             </div>
 
             <div className="flex flex-col gap-1">
@@ -151,7 +151,7 @@ function OrderForm( {closeModal, cartItems, clearCart, restaurantId} ) {
             <Button
               title="Отменить"
               variant="delete"
-              // closeModal={closeModal()}
+              closeModal={closeModal()}
             />
           </div>
         </form>

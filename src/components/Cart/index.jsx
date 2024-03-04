@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Counter from "components/Counter";
 import OrderForm from "components/OrderForm";
-import Modal from "react-modal";
+// import Modal from "react-modal";
 
 function Cart() {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || [],
   );
   const [totalAmount, setTotalAmount] = useState(0);
-  const [modalIsOpen, setModalIsOpen] = useState(false); // состояние для открытия и закрытия модального окна
+  const [modalIsOpen, setModalIsOpen] = useState(false); // состояние для модального окна
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -31,10 +31,12 @@ function Cart() {
       ...cartItem,
       quantity: cartItem.quantity + 1,
     };
-    let newItems = cartItems.map((item) =>
-      item.id === cartItem.itemId ? newCartItem : item,
-    );
-    setCartItems(newItems);
+    // let newItems = cartItems.map((item) =>
+    //   item.id === cartItem.itemId ? newCartItem : item,
+    // );
+    // setCartItems(newItems);
+    let newItems = cartItems.filter((c) => c.itemId !== cartItem.itemId);
+    setCartItems([...newItems, newCartItem]);
   };
 
   const reduceQuantity = (cartItem) => {
@@ -43,10 +45,12 @@ function Cart() {
         ...cartItem,
         quantity: cartItem.quantity - 1,
       };
-      let newItems = cartItems.map((item) =>
-        item.id === cartItem.itemId ? newCartItem : item,
-      );
-      setCartItems(newItems);
+      // let newItems = cartItems.map((item) =>
+      //   item.id === cartItem.itemId ? newCartItem : item,
+      // );
+      // setCartItems(newItems);
+      let newItems = cartItems.filter((c) => c.itemId !== cartItem.itemId);
+      setCartItems([...newItems, newCartItem]);
     }
   };
 
@@ -64,10 +68,9 @@ function Cart() {
 
   return (
     <div>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      {/* <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <OrderForm closeModal={closeModal} cartItems={cartItems} clearCart={clearCart} />
-      </Modal>
-
+      </Modal> */}
       {cartItems.length === 0 ? (
         <div className="px-6 md:px-4 lg:px-2 xl:px-0 py-28 md:py-32 lg:py-40 max-w-7xl m-auto ">
           <div className="flex flex-col gap-10 items-center">
@@ -144,10 +147,14 @@ function Cart() {
               description={"Оформить заказ"}
               variant="default"
               // Вызываем модальное окно
-              onClick={() => openModal()}
+              // onClick={() => openModal()}
+              openModal={openModal}
             />
           </div>
         </div>
+      )}
+      {modalIsOpen && (
+        <OrderForm closeModal={closeModal} cartItems={cartItems} clearCart={clearCart} />
       )}
     </div>
   );

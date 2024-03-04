@@ -5,7 +5,6 @@ import { format } from "date-fns";
 
 function RestaurantPage() {
   const { slug } = useParams();
-
   const [restaurant, setRestaurant] = useState([]);
 
   useEffect(() => {
